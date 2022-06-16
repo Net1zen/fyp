@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"
+        android:title="Inicio"
+        android:icon="@drawable/ic_baseline_home_24"/>
+
+    <item android:id="@+id/nav_search"
+        android:title="Buscar"
+        android:icon="@drawable/ic_baseline_search_24"/>
+
+    <item android:id="@+id/nav_create"
+        android:title="Crear Publicación"
+        android:icon="@drawable/ic_baseline_add_24"/>
+
+    <item android:id="@+id/nav_profile"
+        android:title="Mi perfil"
+        android:icon="@drawable/ic_baseline_person_24"/>
+</menu>
