@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final int GALLERY_INTENT = 1;
+    private static final int PICK_IMAGE_FILE = 1;
     private ImageView btnClose;
     private CircleImageView imageProfile;
     private TextView save, changePhoto;
@@ -80,11 +80,28 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         checkTypeOfUser();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.closeEdit:
+                finish();
+                break;
+            case R.id.save:
+                updateProfile();
+                finish();
+                break;
+            case R.id.changePhoto:
+                // Elegir una imagen de la galeria
+                selectPictureFromGallery();
+                break;
+        }
+    }
+
     private void checkTypeOfUser(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild("teachers")){
+                if (snapshot.child("teachers").getValue().equals(firebaseUser.getUid())){
                     Log.d("docente", "El usuario actual es un docente");
                     getTeacherData();
                 } else {
@@ -152,23 +169,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.closeEdit:
-                finish();
-                break;
-            case R.id.save:
-                updateProfile();
-                finish();
-                break;
-            case R.id.changePhoto:
-                // Elegir una imagen de la galeria
-                selectPictureFromGallery();
-                break;
-        }
-    }
-
     private void updateProfile() {
         HashMap<String, Object> editProfileMap = new HashMap<>();
         editProfileMap.put("name", editTextName.getText().toString());
@@ -185,7 +185,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+        if (requestCode == PICK_IMAGE_FILE && resultCode == RESULT_OK) {
             imageUri = data.getData();
             uploadImage();
         } else {
@@ -230,7 +230,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*"); // Formato de imagen
         galleryIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        startActivityForResult(Intent.createChooser(galleryIntent,"Selecciona una foto"),GALLERY_INTENT);
+        startActivityForResult(Intent.createChooser(galleryIntent,"Selecciona una foto"), PICK_IMAGE_FILE);
     }
 
 }

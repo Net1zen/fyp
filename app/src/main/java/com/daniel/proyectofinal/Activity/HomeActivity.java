@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().equals(Teacher.class)){
+                if (snapshot.child("teachers").getValue().equals(firebaseUser.getUid())){
                     Log.d("docente", "El usuario actual es un docente");
                     Toast.makeText(HomeActivity.this, "Solo los centros educativos pueden crear publicaciones", Toast.LENGTH_SHORT).show();
                 } else {

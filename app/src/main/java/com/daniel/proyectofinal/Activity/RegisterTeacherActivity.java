@@ -146,9 +146,10 @@ public class RegisterTeacherActivity extends AppCompatActivity implements View.O
                             userData.put("surname", surname);
                             userData.put("age", age);
                             userData.put("phone", phone);
-                            userData.put("isEducationalCenter", "false");
                             // La imagen de momento estará vacía
                             userData.put("image", "");
+                            // El curriculum de momento estará vacío
+                            userData.put("curriculum", "");
 
                             // Inicializamos la instancia de la base de datos de Firebase
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

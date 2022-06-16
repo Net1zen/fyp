@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.proyectofinal.Model.Teacher;
 import com.daniel.proyectofinal.R;
-import com.daniel.proyectofinal.RedirectProfile;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.daniel.proyectofinal.Activity.RedirectProfileActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -68,7 +66,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         holder.fullname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RedirectProfile.class);
+                Intent intent = new Intent(context, RedirectProfileActivity.class);
                 // Enviar datos al intent
                 intent.putExtra("userId", teacher.getUid()); // Los datos que se envian mediante putExtra son enviados como bundle
                 intent.putExtra("userType", "docente");
@@ -79,7 +77,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
         holder.imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RedirectProfile.class);
+                Intent intent = new Intent(context, RedirectProfileActivity.class);
                 // Enviar datos al intent
                 intent.putExtra("userId", teacher.getUid());
                 intent.putExtra("userType", "docente");

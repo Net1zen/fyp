@@ -1,10 +1,4 @@
-package com.daniel.proyectofinal;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.daniel.proyectofinal.Activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,14 +6,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.daniel.proyectofinal.Adapter.MessageChatAdapter;
 import com.daniel.proyectofinal.Model.ChatMessage;
+import com.daniel.proyectofinal.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +34,7 @@ public class ChatActivity extends AppCompatActivity {
     private String uid;
     private String txtChatProfileName;
     private String urlProfilePicture;
+    private String txtSenderName;
 
     /*Firebase*/
     private FirebaseDatabase firebaseDatabase;
@@ -54,19 +55,18 @@ public class ChatActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("chat");
 
-        messageAdapter = new MessageChatAdapter(this);
-        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(this);
-        recyclerViewMessages.setLayoutManager(linearLayoutManager);
-        recyclerViewMessages.setAdapter(messageAdapter);
-
         /*Obtener los datos transferidos mediante el intent (Los datos transferidos por medio de un intent se envian como Bundle)*/
         Bundle intent = getIntent().getExtras();
         if (intent != null) {
             // Obtenemos los datos del Bundle, en este caso el userId
             uid = intent.getString("uid");
             txtChatProfileName = intent.getString("profileName");
+            txtSenderName = intent.getString("senderName");
         }
-
+        messageAdapter = new MessageChatAdapter(this, txtSenderName);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerViewMessages.setLayoutManager(linearLayoutManager);
+        recyclerViewMessages.setAdapter(messageAdapter);
         chatProfileName.setText(txtChatProfileName);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //messageAdapter.addMessage(new ChatMessage("",name.getText().toString(), txtMessage.getText().toString(), "00:00"));
                 /*Enviar el mensaje a la base de datos*/
-                ChatMessage chatMessage = new ChatMessage("",chatProfileName.getText().toString(), txtMessage.getText().toString(), "00:00");
+                ChatMessage chatMessage = new ChatMessage("", chatProfileName.getText().toString(), txtMessage.getText().toString(), "00:00");
                 databaseReference.push().setValue(chatMessage);
             }
         });
@@ -119,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     /*Método para pasar al ultimo objeto del recyclerview*/
-    private void setScrollbar(){
-        recyclerViewMessages.scrollToPosition(messageAdapter.getItemCount()-1);
+    private void setScrollbar() {
+        recyclerViewMessages.scrollToPosition(messageAdapter.getItemCount() - 1);
     }
 }

@@ -152,7 +152,6 @@ public class RegisterCenterActivity extends AppCompatActivity implements View.On
                             userData.put("website", website);
                             userData.put("address", address);
                             userData.put("phone", phone);
-                            userData.put("isEducationalCenter", "true");
                             // La imagen de momento estará vacía
                             userData.put("image", "");
 

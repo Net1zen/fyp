@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RedirectProfile">
+    tools:context=".Activity.RedirectProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
@@ -121,11 +121,22 @@
             android:layout_gravity="center"
             android:text="@string/verMapa" />
 
+        <!--BOTÓN VER CV-->
+        <Button
+            android:id="@+id/btnVerCV"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="@string/verCV" />
+
         <!--BOTÓN ENVIAR MENSAJE-->
         <Button
             android:id="@+id/btnEnviarMensaje"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:layout_gravity="center"
             android:text="@string/enviarMensaje" />
 

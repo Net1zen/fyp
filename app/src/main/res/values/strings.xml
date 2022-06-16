@@ -20,15 +20,6 @@
     <string name="nombreCentro">Nombre del centro educativo</string>
     <string name="sitioWeb">Sitio web del centro</string>
 
-    <!--PERFIL PROPIO-->
-    <string name="uidtxt">Uid</string>
-    <string name="uidPerfil"> -- </string>
-    <string name="correotxt">Correo: </string>
-    <string name="correoPerfil"> -- </string>
-    <string name="nombretxt">Nombre: </string>
-    <string name="nombrePerfil"> -- </string>
-    <string name="volverAtras">Boton para volver atras</string>
-
     <!--MENU-->
     <string name="MisDatosOpcion">Mis Datos</string>
     <string name="CrearPublicacionOpcion">Crear Post</string>
@@ -52,7 +43,9 @@
     <string name="SubirCurriculum">Subir Curriculum</string>
     <string name="visitarSitioWEB">Ir al sitio web</string>
     <string name="verMapa">Ver mapa</string>
+    <string name="verCV">Ver CV</string>
     <string name="enviarMensaje">Enviar Mensaje</string>
+    <string name="volverAtras">Boton para volver atras</string>
 
     <!--FEED-->
     <string name="DescripcionLogo">Logo de la aplicación</string>
@@ -61,10 +54,11 @@
     <!--BUSQUEDA-->
     <string name="buscar">Buscar…</string>
     <string name="iconoBuscarDescripcion">Icono de buscar</string>
-    
+
     <!--POST-->
     <string name="cerrarDescripcion">Boton de cerrar</string>
     <string name="publicar">POST</string>
     <string name="cargo">Cargo:</string>
     <string name="descripcionOferta">Descripcion de la oferta que se va a publicar</string>
+
 </resources>

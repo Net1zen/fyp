@@ -1,4 +1,4 @@
-package com.daniel.proyectofinal;
+package com.daniel.proyectofinal.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.daniel.proyectofinal.Adapter.MessageInboxAdapter;
 import com.daniel.proyectofinal.Model.MessageInbox;
+import com.daniel.proyectofinal.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

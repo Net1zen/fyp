@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daniel.proyectofinal.Model.Center;
 import com.daniel.proyectofinal.Model.Post;
 import com.daniel.proyectofinal.R;
-import com.daniel.proyectofinal.RedirectProfile;
+import com.daniel.proyectofinal.Activity.RedirectProfileActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -61,18 +60,20 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostAdapter.ViewH
                 holder.username.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent redirectProfile = new Intent(context, RedirectProfile.class);
+                        Intent redirectProfile = new Intent(context, RedirectProfileActivity.class);
                         //*Pasamos el id del propietario de la publicacion *//*
                         redirectProfile.putExtra("userId", center.getUid());
+                        redirectProfile.putExtra("userType", "centro");
                         context.startActivity(redirectProfile);
                     }
                 });
                 holder.imageProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent redirectProfile = new Intent(context, RedirectProfile.class);
+                        Intent redirectProfile = new Intent(context, RedirectProfileActivity.class);
                         //*Pasamos el id del propietario de la publicacion *//*
                         redirectProfile.putExtra("userId", center.getUid());
+                        redirectProfile.putExtra("userType", "centro");
                         context.startActivity(redirectProfile);
                     }
                 });

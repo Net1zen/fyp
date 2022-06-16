@@ -21,9 +21,11 @@ public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.
 
     private List<ChatMessage> chatMessages = new ArrayList<>();
     private Context context;
+    private String senderName;
 
-    public MessageChatAdapter(Context context){
+    public MessageChatAdapter(Context context, String senderName){
         this.context = context;
+        this.senderName = senderName;
     }
 
     public void addMessage(ChatMessage chatMessage){
@@ -42,7 +44,7 @@ public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ChatMessage chatMessage = chatMessages.get(position);
-        holder.name.setText(chatMessage.getName());
+        holder.name.setText(senderName);
         holder.txtMessage.setText(chatMessage.getMessage());
         holder.hour.setText(chatMessage.getTime());
     }
@@ -64,7 +66,7 @@ public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.
             super(itemView);
 
             profilePicture = itemView.findViewById(R.id.imagePost);
-            name = itemView.findViewById(R.id.nombreMensaje);
+            name = itemView.findViewById(R.id.nombreEmisor);
             txtMessage = itemView.findViewById(R.id.txtMensaje);
             hour = itemView.findViewById(R.id.horaMensaje);
         }

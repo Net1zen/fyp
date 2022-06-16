@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.proyectofinal.Model.Center;
 import com.daniel.proyectofinal.R;
-import com.daniel.proyectofinal.RedirectProfile;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.daniel.proyectofinal.Activity.RedirectProfileActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -64,7 +62,7 @@ public class CenterAdapter extends RecyclerView.Adapter<CenterAdapter.ViewHolder
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RedirectProfile.class);
+                Intent intent = new Intent(context, RedirectProfileActivity.class);
                 // Enviar datos al intent
                 intent.putExtra("userId", center.getUid()); // Los datos que se envian mediante putExtra son enviados como bundle
                 intent.putExtra("userType", "centro");
@@ -75,7 +73,7 @@ public class CenterAdapter extends RecyclerView.Adapter<CenterAdapter.ViewHolder
         holder.imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RedirectProfile.class);
+                Intent intent = new Intent(context, RedirectProfileActivity.class);
                 // Enviar datos al intent
                 intent.putExtra("userId", center.getUid());
                 intent.putExtra("userType", "centro");

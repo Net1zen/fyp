@@ -22,13 +22,13 @@
         tools:ignore="MissingClass"
         tools:targetApi="31">
         <activity
-            android:name=".MessagesActivity"
+            android:name=".Activity.MessagesActivity"
             android:exported="false" />
         <activity
-            android:name=".RedirectProfile"
+            android:name=".Activity.RedirectProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".Activity.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.EditProfileActivity"

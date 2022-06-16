@@ -17,8 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:background="@color/design_default_color_background">
+            android:id="@+id/toolbar">
 
             <RelativeLayout
                 android:layout_width="match_parent"

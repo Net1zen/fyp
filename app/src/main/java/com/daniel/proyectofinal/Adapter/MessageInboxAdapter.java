@@ -1,6 +1,7 @@
 package com.daniel.proyectofinal.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,17 +38,20 @@ public class MessageInboxAdapter extends RecyclerView.Adapter<MessageInboxAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageInbox auxInboxMessages = inboxMessages.get(position);
 
-        if (!auxInboxMessages.getProfilePicture().isEmpty()) {
-            Picasso.get().load(auxInboxMessages.getProfilePicture()).into(holder.profilePicture);
-        }
-        holder.name.setText(auxInboxMessages.getName());
-        holder.lastMessage.setText(auxInboxMessages.getLastMessage());
+        try {
+            if (!auxInboxMessages.getProfilePicture().isEmpty()) {
+                Picasso.get().load(auxInboxMessages.getProfilePicture()).into(holder.profilePicture);
+            }
+            holder.name.setText(auxInboxMessages.getName());
+            holder.lastMessage.setText(auxInboxMessages.getLastMessage());
 
-        if (auxInboxMessages.getContadorMensajeNoLeido() == 0) {
-            holder.unreadMessages.setVisibility(View.GONE);
-        }
-        else {
-            holder.unreadMessages.setVisibility(View.VISIBLE);
+            if (auxInboxMessages.getContadorMensajeNoLeido() == 0) {
+                holder.unreadMessages.setVisibility(View.GONE);
+            } else {
+                holder.unreadMessages.setVisibility(View.VISIBLE);
+            }
+        } catch (Exception exception){
+            Log.d("exceptionInbox", exception.getMessage());
         }
     }
 

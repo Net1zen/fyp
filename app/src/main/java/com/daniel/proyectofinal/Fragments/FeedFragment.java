@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.proyectofinal.Activity.MainActivity;
 import com.daniel.proyectofinal.Adapter.PostAdapter;
-import com.daniel.proyectofinal.MessagesActivity;
+import com.daniel.proyectofinal.Activity.MessagesActivity;
 import com.daniel.proyectofinal.Model.Post;
 import com.daniel.proyectofinal.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

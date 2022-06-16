@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fullname"
-            android:text="Full name"
             android:maxLines="1"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_primary_dark"/>

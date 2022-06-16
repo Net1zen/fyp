@@ -1,4 +1,4 @@
-package com.daniel.proyectofinal;
+package com.daniel.proyectofinal.Activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.daniel.proyectofinal.Model.Center;
 import com.daniel.proyectofinal.Model.Teacher;
+import com.daniel.proyectofinal.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class RedirectProfile extends AppCompatActivity implements View.OnClickListener {
+public class RedirectProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
@@ -37,7 +38,7 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
     private ImageView imageProfile, imgBack;
     private TextView nameData, emailData, phoneData, dynamicDataAgeOrWebsite, addressData;
 
-    private Button btnSitioWeb, btnVerMapa, btnEnviarMensaje;
+    private Button btnSitioWeb, btnVerMapa, btnEnviarMensaje, btnVerCV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
         btnVerMapa.setOnClickListener(this);
         btnEnviarMensaje = findViewById(R.id.btnEnviarMensaje);
         btnEnviarMensaje.setOnClickListener(this);
+        btnVerCV = findViewById(R.id.btnVerCV);
+        btnVerCV.setOnClickListener(this);
 
         // Comprobar si es un usuario o un centro educativo
         checkTypeofUser();
@@ -94,12 +97,16 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
             case R.id.btnEnviarMensaje:
                 sendMessage();
                 break;
+            case R.id.btnVerCV:
+                showCV();
+                break;
         }
     }
 
     private void checkTypeofUser() {
         if (userType.equals("docente")) {
             getTeacherInfo();
+            btnVerCV.setVisibility(View.VISIBLE);
         } else {
             getCenterInfo();
             btnSitioWeb.setVisibility(View.VISIBLE);
@@ -108,9 +115,10 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
     }
 
     private void sendMessage() {
-        Intent chatActivity = new Intent(RedirectProfile.this, ChatActivity.class);
+        Intent chatActivity = new Intent(RedirectProfileActivity.this, ChatActivity.class);
         chatActivity.putExtra("uid", uid);
         chatActivity.putExtra("profileName", nameData.getText().toString());
+        chatActivity.putExtra("senderName", firebaseUser.getDisplayName());
         startActivity(chatActivity);
     }
 
@@ -135,7 +143,7 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(RedirectProfile.this, "Ha ocurrido un error inesperado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RedirectProfileActivity.this, "Ha ocurrido un error inesperado", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,4 +192,12 @@ public class RedirectProfile extends AppCompatActivity implements View.OnClickLi
         Intent googleMapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(googleMapsAddress));
         startActivity(googleMapsIntent);
     }
+
+    private void showCV() {
+        String cvUri = addressData.getText().toString();
+        String cvUrl = cvUri;
+        Intent googleMapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(cvUrl));
+        startActivity(googleMapsIntent);
+    }
+
 }

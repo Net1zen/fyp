@@ -1,7 +1,12 @@
 package com.daniel.proyectofinal.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.daniel.proyectofinal.Activity.EditProfileActivity;
+import com.daniel.proyectofinal.Activity.HomeActivity;
 import com.daniel.proyectofinal.Activity.MainActivity;
 import com.daniel.proyectofinal.Model.Center;
 import com.daniel.proyectofinal.Model.Teacher;
 import com.daniel.proyectofinal.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,16 +35,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
+    private static final int PICK_PDF_FILE = 2;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private String uid;
+    private Uri curriculumUri;
 
     private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+    private StorageTask uploadTask;
 
     private ImageView imageProfile;
     private TextView name, email, phone, dynamicDataAgeOrWebsite, address;
@@ -55,6 +72,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference().child("CVs");
         // Comprobar si hay una sesión activa
         if (firebaseUser==null){
             startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
@@ -85,12 +103,32 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnLogout:
+                cerrarSesion();
+                break;
+            case R.id.btnActualizarDatos:
+                actualizarDatos();
+                break;
+            case R.id.subirCurriculum:
+                chooseCurriculum();
+                break;
+        }
+    }
+
+    private void chooseCurriculum() {
+        Intent explorerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        explorerIntent.setType("application/pdf");
+        startActivityForResult(Intent.createChooser(explorerIntent, "Selecciona un documento"), PICK_PDF_FILE);
+    }
+
     private void checkTypeOfUser(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println(snapshot.getValue());
-                if (snapshot.hasChild("teachers")){
+                if (snapshot.child("teachers").getValue().equals(firebaseUser.getUid())){
                     Log.d("docente", "El usuario actual es un docente");
                     getTeacherInfo();
                 } else {
@@ -160,19 +198,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnLogout:
-                cerrarSesion();
-                break;
-            case R.id.btnActualizarDatos:
-                actualizarDatos();
-                break;
-        }
-
-    }
-
     private void actualizarDatos() {
         startActivity(new Intent(getActivity(), EditProfileActivity.class));
     }
@@ -183,5 +208,46 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         Toast.makeText(getActivity(), "Se ha cerrado sesión", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_PDF_FILE && resultCode == RESULT_OK){
+            curriculumUri = data.getData();
+            uploadCurriculum();
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*Metodo que carga el documento pdf y nos devuelve el url del pdf para setear este url en el campo curriculum del docente*/
+    private void uploadCurriculum() {
+        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Cargando documento...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        if (curriculumUri != null) {
+            // Path de la imagen, en el nombre contendra la la fecha
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis() + ".pdf");
+            uploadTask = fileReference.putFile(curriculumUri);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String curriculumUrl = uri.toString();
+                                    databaseReference.child("teachers").child(firebaseUser.getUid()).child("curriculum").setValue(curriculumUrl);
+                                    progressDialog.dismiss();
+                                }
+                            });
+                        }
+                    }
+                }});
+        }
     }
 }
