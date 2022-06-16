@@ -118,7 +118,7 @@ public class RedirectProfileActivity extends AppCompatActivity implements View.O
         Intent chatActivity = new Intent(RedirectProfileActivity.this, ChatActivity.class);
         chatActivity.putExtra("uid", uid);
         chatActivity.putExtra("profileName", nameData.getText().toString());
-        chatActivity.putExtra("senderName", firebaseUser.getDisplayName());
+        chatActivity.putExtra("senderName", firebaseUser.getEmail());
         startActivity(chatActivity);
     }
 
