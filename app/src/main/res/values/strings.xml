@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">FYP</string>
+    <string name="btn_login">Login</string>
+    <string name="eslogan">Find Your Place</string>
+    <string name="btn_registrar">Registrarme</string>
+    <string name="inicio">Inicio</string>
+    <string name="olvidaPassword">¿Olvidó la contraseña?</string>
+
+    <!--REGISTRO-->
+    <string name="titulo">FYP</string>
+    <string name="docente">Docente</string>
+    <string name="centroEducativo">Centro educativo</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="edad">Edad</string>
+    <string name="telefono">Telefono</string>
+    <string name="direccion">Dirección</string>
+    <string name="nombreCentro">Nombre del centro educativo</string>
+    <string name="sitioWeb">Sitio web del centro</string>
+
+    <!--MENU-->
+    <string name="MisDatosOpcion">Mis Datos</string>
+    <string name="CrearPublicacionOpcion">Crear Post</string>
+    <string name="PublicacionesOpcion">Publicaciones</string>
+    <string name="UsuarioOpcion">Usuarios</string>
+    <string name="ChatsOpcion">Chats</string>
+    <string name="CerrarSesion">Cerrar Sesion</string>
+
+    <!--PERFIL-->
+    <string name="MisDatostxt">Mis Datos Personales</string>
+    <string name="uidDato">UID</string>
+    <string name="NombreDato">NOMBRE</string>
+    <string name="ApellidosDato">APELLIDO</string>
+    <string name="CorreoDato">CORREO</string>
+    <string name="PasswordDato">CONTRASEÑA</string>
+    <string name="EdadDato">EDAD</string>
+    <string name="DirecciónDato">DIRECCIÓN</string>
+    <string name="TelefonoDato">TELEFONO</string>
+    <string name="ActualizarDatos">Actualizar Datos</string>
+    <string name="ActualizarPassword">Actualizar Contraseña</string>
+    <string name="SubirCurriculum">Subir Curriculum</string>
+    <string name="visitarSitioWEB">Ir al sitio web</string>
+    <string name="verMapa">Ver mapa</string>
+    <string name="verCV">Ver CV</string>
+    <string name="enviarMensaje">Enviar Mensaje</string>
+    <string name="volverAtras">Boton para volver atras</string>
+
+    <!--FEED-->
+    <string name="DescripcionLogo">Logo de la aplicación</string>
+    <string name="btnChatDescription">Boton para acceder a la pantalla de chats</string>
+
+    <!--BUSQUEDA-->
+    <string name="buscar">Buscar…</string>
+    <string name="iconoBuscarDescripcion">Icono de buscar</string>
+
+    <!--POST-->
+    <string name="cerrarDescripcion">Boton de cerrar</string>
+    <string name="publicar">POST</string>
+    <string name="cargo">Cargo:</string>
+    <string name="descripcionOferta">Descripcion de la oferta que se va a publicar</string>
+
+</resources>

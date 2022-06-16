@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ProfileFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/MisDatostxt"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--FOTO DE PERFIL-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagenMisDatos"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/foto_perfil"/>
+
+        <!--NOMBRE COMPLETO-->
+        <TextView
+            android:id="@+id/nombreDato"
+            android:text="@string/NombreDato"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--DYNAMIC DATA 1 - Teacher age(ua) || Center website(cw)-->
+        <TextView
+            android:id="@+id/edadOSitioWebDato"
+            android:text="@string/EdadDato"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--CORREO-->
+        <TextView
+            android:id="@+id/correoDato"
+            android:text="@string/CorreoDato"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--TELEFONO-->
+        <TextView
+            android:id="@+id/telefonoDato"
+            android:text="@string/TelefonoDato"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--DIRECCIÓN-->
+        <TextView
+            android:id="@+id/direccionDato"
+            android:text="@string/DirecciónDato"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--BOTÓN SUBIR CURRICULUM-->
+        <Button
+            android:id="@+id/subirCurriculum"
+            android:text="@string/SubirCurriculum"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <!--BOTÓN ACTUALIZAR DATOS-->
+        <Button
+            android:id="@+id/btnActualizarDatos"
+            android:text="@string/ActualizarDatos"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <!--BOTÓN ACTUALIZAR CONTRASEÑA-->
+        <Button
+            android:id="@+id/btnActualizarPassword"
+            android:text="@string/ActualizarPassword"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <!--BOTÓN CERRAR SESIÓN-->
+        <Button
+            android:id="@+id/btnLogout"
+            android:text="@string/CerrarSesion"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>
